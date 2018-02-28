@@ -35,6 +35,10 @@ if (empty($cache_key)) $properties[xPDO::OPT_CACHE_KEY] = $modx->getOption('cach
 if (empty($cache_handler)) $properties[xPDO::OPT_CACHE_HANDLER] = $modx->getOption('cache_resource_handler', null, 'xPDOFileCache');
 if (empty($cache_expires)) $properties[xPDO::OPT_CACHE_EXPIRES] = (integer) $modx->getOption('cache_resource_expires', null, 0);
 
+$properties['metaPageEnable'] = !isset($metaPageEnable) ? false : $metaPageEnable;
+$properties['metaPagePrevTpl'] = !isset($metaPagePrevTpl) ? "<link rel=\"prev\" href=\"[[+href]]\">" : $metaPagePrevTpl;
+$properties['metaPageNextTpl'] = !isset($metaPageNextTpl) ? "<link rel=\"next\" href=\"[[+href]]\">" : $metaPageNextTpl;
+
 if ($properties['page'] == 1 && $properties['pageOneLimit'] !== $properties['actualLimit']) {
     $properties['limit'] = $properties['pageOneLimit'];
 }
@@ -104,6 +108,11 @@ if (empty($cached) || !isset($cached['properties']) || !isset($cached['output'])
     $properties = $cached['properties'];
     $output = $cached['output'];
 }
+
+if ($properties['metaPageEnable']) {
+    getpage_buildMetaPage($modx, $properties);
+}
+
 $modx->setPlaceholders($properties, $properties['namespace']);
 if (!empty($properties['toPlaceholder'])) {
     $modx->setPlaceholder($properties['toPlaceholder'], $output);

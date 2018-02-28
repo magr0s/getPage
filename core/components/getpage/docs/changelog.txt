@@ -1,5 +1,9 @@
 Changelog for getPage.
 
+getPage 1.2.5-beta (March 1, 2018)
+====================================
+- Add meta page output
+
 getPage 1.2.4-pl (March 24, 2014)
 ====================================
 - [#19] Add scriptProperties to cachePageKey signature

@@ -25,8 +25,8 @@ unset($root);
 
 /* package defines */
 define('PKG_NAME','getPage');
-define('PKG_VERSION','1.2.4');
-define('PKG_RELEASE','pl');
+define('PKG_VERSION','1.2.5');
+define('PKG_RELEASE','beta');
 define('PKG_LNAME',strtolower(PKG_NAME));
 
 // override with your own defines here (see build.config.sample.php)

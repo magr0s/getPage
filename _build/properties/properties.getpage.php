@@ -151,6 +151,27 @@ $properties = array(
         'options' => '',
         'value' => '',
     )
+    ,array(
+        'name' => 'metaPageEnable',
+        'desc' => 'If true, add to meta page uri.',
+        'type' => 'combo-boolean',
+        'options' => '',
+        'value' => true,
+    )
+    ,array(
+        'name' => 'metaPagePrevTpl',
+        'desc' => 'Meta tag for previous page.',
+        'type' => 'textfield',
+        'options' => '',
+        'value' => '<link rel="prev" href="[[+href]]">',
+    )
+    ,array(
+        'name' => 'metaPageNextTpl',
+        'desc' => 'Meta tag for next page.',
+        'type' => 'textfield',
+        'options' => '',
+        'value' => '    <link rel="next" href="[[+href]]">',
+    )
 );
 
 return $properties;

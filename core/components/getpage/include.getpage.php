@@ -50,3 +50,51 @@ function getpage_makeUrl(& $modx, $properties, $pageNo, $tpl) {
     $nav= $modx->newObject('modChunk')->process($properties, $tpl);
     return $nav;
 }
+
+/**
+ * @param $modx
+ * @param $properties
+ */
+function getpage_buildMetaPage(& $modx, $properties)
+{
+    $page = $properties['page'];
+    $pageCount = $properties['pageCount'];
+    $metaPageTpl = '';
+
+    if (
+        $page > 1
+        AND $page <= $pageCount
+    ) {
+        $metaPageTpl .= getpage_makeMetaUrl($modx, $page - 1, $properties['metaPagePrevTpl']);
+    }
+
+    if (
+        $pageCount > 1
+        AND $pageCount > $page
+    ) {
+        $metaPageTpl .= getpage_makeMetaUrl($modx, $page + 1, $properties['metaPageNextTpl']);
+    }
+
+    if (!empty($metaPageTpl)) {
+        $modx->regClientStartupHTMLBlock($metaPageTpl);
+    }
+}
+
+/**
+ * @param $modx
+ * @param $pageNo
+ * @param $tpl
+ * @return mixed
+ */
+function getpage_makeMetaUrl(& $modx, $pageNo , $tpl)
+{
+    $params = ($pageNo > 1) ? array(
+        'page'  => $pageNo
+    ) : array();
+    $uri = $modx->makeUrl($modx->resource->id, '', $params, 'full');
+    $metaPage = $modx->newObject('modChunk')->process(array(
+        'href'   => $uri
+    ), $tpl);
+
+    return $metaPage;
+}
